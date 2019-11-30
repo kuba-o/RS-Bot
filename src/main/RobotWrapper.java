@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 public class RobotWrapper {
     private final Robot robot;
@@ -45,27 +46,59 @@ public class RobotWrapper {
         }
     }
 
-    public void pressTheButton(char c){
-        if (c == 'L'){
-            pressLeft();
-        }
+    public void pressTheButton(String c){
+        switch (c){
+            case "L": {
+                mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                break;
+            }
 
-        if(c == 'R'){
-            pressRight();
+            case "R": {
+                mousePress(InputEvent.BUTTON3_DOWN_MASK);
+                break;
+            }
+
+            case "1":{
+                pressKey(KeyEvent.VK_1);
+                break;
+            }
+
+            case "2":{
+                pressKey(KeyEvent.VK_2);
+                break;
+            }
+
+            default:{
+                System.out.println("Ten znak nie został zmapowany: " + c);
+            }
         }
     }
 
-    public void pressLeft(){
-        robot.mousePress(InputEvent.BUTTON1_MASK);
+    private void pressKey(int vk1) {
         robot.delay(150);
-        robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        robot.keyPress(vk1);
+        robot.delay(100);
+        robot.keyRelease(vk1);
+    }
+
+    private void mousePress(int vk1){
+        robot.delay(150);
+        robot.mousePress(vk1);
+        robot.delay(100);
+        robot.mouseRelease(vk1);
+    }
+
+    public void pressLeft(){
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.delay(150);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         robot.delay(100);
     }
 
     public void pressRight(){
-        robot.mousePress(InputEvent.BUTTON3_MASK);
+        robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
         robot.delay(150);
-        robot.mouseRelease(InputEvent.BUTTON3_MASK);
+        robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
         robot.delay(100);
     }
 

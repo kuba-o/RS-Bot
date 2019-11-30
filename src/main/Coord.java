@@ -5,7 +5,7 @@ public class Coord {
     double x;
     double y;
     int delayTime;
-    char mouseButton;
+    String mouseButton;
 
     public Coord(){}
 
@@ -13,11 +13,12 @@ public class Coord {
         this.x = _x;
         this.y = _y;
     }
-    public Coord(String loc, int xCoordinate, int yCoordinate, int delTime, char mouseButtonPressed){
-        this.name = loc;
-        this.x = xCoordinate;
-        this.y = yCoordinate;
-        this.delayTime = delTime;
-        this.mouseButton = mouseButtonPressed;
+
+    public Coord(String[] ar){
+        this.name = ar[0];
+        this.x = Integer.parseInt(ar[1]);
+        this.y = Integer.parseInt(ar[2]);;
+        this.delayTime = Integer.parseInt(ar[3]);;
+        this.mouseButton = ar[4];;
     }
 }

@@ -22,11 +22,10 @@ public class GeometricTools {
         numberOfCoords = (int) Math.ceil(Math.random() * 4)+1;
         double range = Math.abs(end.x - start.x)+1;
         for (int i=0; i<numberOfCoords; i++){
-            points.add(Math.ceil(Math.random()*(int)range)+getMin(start.x, end.x));
+            points.add(Math.ceil(Math.random()*(int)range)+Math.min(start.x, end.x));
         }
 
         java.util.Collections.sort(points);
-
         if (start.x > end.x){
             java.util.Collections.reverse(points);
         }
@@ -39,20 +38,10 @@ public class GeometricTools {
         detour.add(end);
     }
 
-    public double getMin(double value1, double value2){
-        if (value1 < value2){
-            return value1;
-        }
-        else{
-            return value2;
-        }
-    }
-
     public double countY(Coord start, Coord end, double x){
         double b = (end.y*start.x-start.y*end.x)/(start.x-end.x);
         double a = (start.y - b)/start.x;
-        double yc = a*x+b;
-        return yc;
+        return a*x+b;
     }
 
     public void calculateSlopes(Coord start, Coord end){
